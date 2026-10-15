@@ -1,0 +1,88 @@
+{
+  "name": "shader-harness-workshop",
+  "version": "1.1.1",
+  "private": true,
+  "type": "module",
+  "description": "Local vision shader harness: team decomposition, bounded iteration, presentation comparison",
+  "main": "dist-desktop/electron/main.js",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "build:ui": "ng build",
+    "build:desktop": "tsc -p tsconfig.desktop.json",
+    "build": "npm run build:ui && npm run build:desktop",
+    "start": "npm run build && electron .",
+    "dev": "npm run build:desktop && concurrently -k \"ng serve --host 127.0.0.1\" \"wait-on http://127.0.0.1:4200 && cross-env UI_DEV_URL=http://127.0.0.1:4200 electron .\"",
+    "serve": "npm run build && node dist-desktop/server/standalone.js",
+    "serve:built": "node dist-desktop/server/standalone.js",
+    "setup:renderer": "playwright install chromium",
+    "doctor": "node --import tsx scripts/doctor.ts",
+    "test": "node --import tsx --test tests/*.test.ts",
+    "test:render": "node --import tsx --test tests/render.integration.ts",
+    "package:dir": "npm run build && electron-builder --dir",
+    "package": "npm run build && electron-builder",
+    "test:pipeline": "node --import tsx --test tests/pipeline.integration.ts",
+    "test:team-pipeline": "node --import tsx --test tests/team-pipeline.integration.ts"
+  },
+  "dependencies": {
+    "@angular/common": "20.3.31",
+    "@angular/compiler": "20.3.31",
+    "@angular/core": "20.3.31",
+    "@angular/forms": "20.3.31",
+    "@angular/platform-browser": "20.3.31",
+    "@langchain/core": "1.2.12",
+    "@langchain/langgraph": "1.4.17",
+    "express": "5.1.0",
+    "playwright": "1.58.2",
+    "rxjs": "7.8.2",
+    "zod": "4.6.5",
+    "zone.js": "0.15.1"
+  },
+  "devDependencies": {
+    "@angular/build": "20.3.31",
+    "@angular/cli": "20.3.31",
+    "@angular/compiler-cli": "20.3.31",
+    "@types/express": "5.0.3",
+    "@types/node": "24.10.1",
+    "concurrently": "9.2.1",
+    "cross-env": "10.1.0",
+    "electron": "44.4.5",
+    "electron-builder": "26.0.12",
+    "tsx": "4.20.6",
+    "typescript": "5.9.3",
+    "wait-on": "9.0.3"
+  },
+  "build": {
+    "appId": "local.shader.harness",
+    "productName": "Shader Harness Studio",
+    "files": [
+      "dist-desktop/**/*",
+      "dist-ui/**/*",
+      "package.json",
+      "LICENSE",
+      "src/app/EMOJI-LICENSE.txt",
+      "samples/**/*"
+    ],
+    "asarUnpack": [
+      "node_modules/playwright*/**/*"
+    ],
+    "mac": {
+      "target": [
+        "dmg"
+      ],
+      "category": "public.app-category.developer-tools"
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ]
+    },
+    "linux": {
+      "target": [
+        "AppImage"
+      ],
+      "category": "Development"
+    }
+  }
+}

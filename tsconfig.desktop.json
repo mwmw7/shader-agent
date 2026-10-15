@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "NodeNext", "moduleResolution": "NodeNext", "lib": ["ES2022", "DOM"],
+    "outDir": "dist-desktop", "rootDir": ".", "types": ["node"], "sourceMap": true
+  },
+  "include": ["electron/**/*.ts", "server/**/*.ts", "shared/**/*.ts"],
+  "exclude": ["node_modules", "tests"]
+}
