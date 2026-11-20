@@ -1,3 +1,13 @@
+## For international engineering reviewers
+
+**Shader Harness Studio** — a local-first educational/research prototype for **AI-assisted shader development and validation**, built with **Electron, Angular, TypeScript, LangGraph, local vision models, WebGL, Chromium, and FFmpeg**.
+
+**Highlights:** multi-agent orchestration, role-based tool access, real render-and-evaluate loops, bounded revisions, failure handling, and automated tests. It uses local inference and should not be confused with a production customer deployment.
+
+See [setup](#1-실행) and [testing](#5-개발테스트) for reproducible instructions.
+
+---
+
 # Shader Harness Studio · Team Lab
 
 An **Electron + Angular + LangGraph** workshop project for 30 Air Force AI developers, organized into 10 teams of three. Given an image, an agent powered by a local vision model creates a shader, evaluates rendered video and frames, and revises the result up to twice. Teams use the same input to compare how task decomposition and node configuration affect the outcome.
